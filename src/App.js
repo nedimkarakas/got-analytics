@@ -27,9 +27,8 @@ class App extends Component {
     return (
       <div>
         <p>PICKS|TIMESTAMP</p>
-        <span>{this.state.picks + ' '}|
+        <span>{this.state.picks + ' '}|{this.state.timestamp}
       </span>
-        <span>{this.state.timestamp}</span>
       </div>
     );
   };
