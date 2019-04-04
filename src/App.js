@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import firebase from 'firebase';
+import firebase from './firebase.js';
 
-const config = {
-  apiKey: "AIzaSyBlFEgp-x93QsnzdUB0J7G_h-pLk0yzoMo",
-  authDomain: "got-analytics.firebaseapp.com",
-  databaseURL: "https://got-analytics.firebaseio.com",
-  projectId: "got-analytics",
-  storageBucket: "got-analytics.appspot.com",
-  messagingSenderId: "953410490273"
-};
-firebase.initializeApp(config);
 
 class App extends Component {
   constructor(props) {
