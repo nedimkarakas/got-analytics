@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
 import firebase from '../services/firebase';
 import auth from '../services/auth';
+import Character from './Character';
 
 class Main extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            choices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49],
+            choices: [],
             votes: [],
         };
     }
 
-    addChoice = (choice) => {
-        const votes = this.state.votes;
-        votes.push(choice);
-        this.setState({ choices: this.state.choices, votes: votes });
+    componentDidMount() {
+        firebase.database().ref('characters').once('value', snapshot => {
+            this.setState({ choices: snapshot.val() })
+        });
+    }
+
+    toggleChoice = (choice) => {
+        const votes = this.state.votes.slice();
+        const choiceIndex = votes.findIndex(c => c === choice);
+        if (choiceIndex > -1) {
+            votes.splice(choiceIndex, 1);
+        } else {
+            votes.push(choice);
+        }
+        this.setState({ votes: votes });
     }
 
     submit = () => {
@@ -33,7 +45,7 @@ class Main extends Component {
             <div>
                 <header className="d-flex">
                     {
-                        this.state.choices.map(c => <button className="btn btn-outline-primary m-4 rounded-circle" key={c} onClick={(e) => this.addChoice(c)}>{c}</button>)
+                        this.state.choices.map((c, i) => <Character onClick={this.toggleChoice} character={c} />)
                     }
                 </header>
                 <div className="d-flex my-5">
@@ -42,7 +54,7 @@ class Main extends Component {
                         this.state.votes.map(v => <span key={v} className="mx-3">{v}</span>)
                     }
                 </div>
-                <button className="btn btn-success" onClick={(e) => this.submit()}>SUBMIT</button>
+                <button className="btn btn-success" onClick={(e) => this.submit()} disabled={this.state.votes.length === 0}>SUBMIT</button>
             </div>
         );
     }
