@@ -3,7 +3,7 @@ import firebase from '../services/firebase';
 import auth from '../services/auth';
 import Character from './Character';
 
-class Main extends Component {
+class Dashboard extends Component {
     constructor(props) {
         super(props);
 
@@ -43,11 +43,11 @@ class Main extends Component {
     render() {
         return (
             <div>
-                <header className="d-flex">
+                <div className="d-flex">
                     {
                         this.state.choices.map((c, i) => <Character onClick={this.toggleChoice} character={c} />)
                     }
-                </header>
+                </div>
                 <div className="d-flex my-5">
                     <strong>Picks: </strong>
                     {
@@ -60,4 +60,4 @@ class Main extends Component {
     }
 }
 
-export default Main;
+export default Dashboard;

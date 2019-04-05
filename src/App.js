@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './components/Login.js';
-import Main from './components/Main.js';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
+import Container from './components/Container';
 
 class App extends Component {
   render() {
@@ -10,8 +10,8 @@ class App extends Component {
       <div className="container">
         <Router>
           <Switch>
-            <Route path ='/login' component={Login} />
-            <ProtectedRoute path ='/main' component={Main} />
+            <Route path='/login' component={Login} />
+            <ProtectedRoute path='/' component={Container} />
           </Switch>
         </Router>
       </div>

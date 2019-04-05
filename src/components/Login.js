@@ -18,7 +18,7 @@ class Login extends Component {
     }
 
     redirectToMain() {
-        this.props.history.push('/main');
+        this.props.history.push('/');
     }
 
     isUserAuthenticated = () => {
