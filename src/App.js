@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
-import firebase from './firebase.js';
-
+import { Router, Route, browserHistory} from 'react-router';
+import firebase from './services/firebase.js';
+import Login from './components/Login.js';
+import Main from './components/Main.js';
 
 class App extends Component {
   constructor(props) {
@@ -28,21 +29,17 @@ class App extends Component {
     });
   }
 
+  isUserAuthenticated = () => {
+    return !!localStorage.getItem('userToken');
+  }
+
   render() {
     return (
       <div className="container">
-        <header className="d-flex">
-          {
-            this.state.choices.map(c => <button className="btn btn-outline-primary m-4 rounded-circle" key={c} onClick={(e) => this.addChoice(c)}>{c}</button>)
-          }
-        </header>
-        <div className="d-flex my-5">
-          <strong>Picks: </strong>
-          {
-            this.state.votes.map(v => <span className="mx-3">{v}</span>)
-          }
-        </div>
-        <button className="btn btn-success" onClick={(e) => this.submit()}>SUBMIT</button>
+        <Router history={browserHistory}>
+          <Route path ='/login' component={Login}>
+          </Route>
+        </Router>
       </div>
     );
   }
