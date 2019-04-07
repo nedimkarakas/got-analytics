@@ -8,8 +8,6 @@ import {
     AccordionItemButton,
     AccordionItemPanel,
 } from 'react-accessible-accordion';
-
-// Demo styles, see 'Styles' section below for some notes on use.
 import 'react-accessible-accordion/dist/fancy-example.css';
 
 
@@ -76,7 +74,7 @@ class Rules extends Component{
       </AccordionItemHeading>
       <AccordionItemPanel>
           <p>
-            Special chips stuff 
+            Special chips stuff
 
           </p>
       </AccordionItemPanel>

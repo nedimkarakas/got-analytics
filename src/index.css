@@ -5,11 +5,35 @@ body {
   font-family: 'Martel Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: bold;
+  background-color: #191919 !important;
+  color: #afafaf !important;
+
+}
+h2{
+  padding: center !important;
+  padding-top: 5% !important;
+  padding-left: 1% !important;
+  font-size: 30px !important;
+  color: #afafaf !important;
+  font-weight: bold !important;
+}
+h3{
+  padding-top: 5% !important;
+  padding-left: 1% !important;
+  font-size: 20px !important;
+  color: #afafaf !important;
+  font-weight: lighter !important;
 }
 .VoteSection{
   margin-top: 50px;
   margin-bottom: 50px;
 }
 .btn{
-  background-color: #EEF36A
+  background-color: #a60006
 }
+.bg-dark{
+  background-color: #191919 !important;
+  font-weight: lighter;
+  border-color: #f9c833 !important;
+};

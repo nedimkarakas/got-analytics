@@ -9,6 +9,7 @@
     "react-accessible-accordion": "^3.0.0",
     "react-accordeon": "^1.1.1",
     "react-dom": "^16.8.6",
+    "react-google-charts": "^3.0.11",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "react-tabbordion": "^1.0.4",

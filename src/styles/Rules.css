@@ -1,3 +1,10 @@
-.accordion_item{
+.accordion{
   background-color: #f8f9fa;
+}
+.accordion__button{
+  background-color: #f8f9fa;
+}
+.accordion__heading{
+  background-color: #f8f9fa;
+
 }

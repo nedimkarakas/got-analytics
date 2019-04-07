@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import auth from "../services/auth";
+import '../styles/Navbar.css';
 
 class Navbar extends Component {
     render() {
@@ -8,7 +9,7 @@ class Navbar extends Component {
         const imageUrl = auth.isAuthenticated() ? auth.getUser().photoURL : null;
 
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
                 <span className="navbar-brand">GoT: The Final Bracket</span>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
                     aria-expanded="false" aria-label="Toggle navigation">

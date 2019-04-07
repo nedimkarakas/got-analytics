@@ -20,7 +20,7 @@ class Character extends Component {
         return (
             <div className={"text-center width-75-px " + (this.props.isSelected ? "d-none" : "")}>
                 <div>
-                    <img alt={this.props.character.Name} src={this.props.character.Image} key={this.props.character.Name} onClick={this.toggleSelect} width="75" height="75" className="rounded-circle" />
+                    <img alt={this.props.character.Name} src={this.props.character.Image} key={this.props.character.Name} onClick={this.toggleSelect} width="125" height="125" className="rounded-circle" />
                 </div>
                 <span>{this.props.character.Name}</span>
             </div>
