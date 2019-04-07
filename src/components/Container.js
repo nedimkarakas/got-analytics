@@ -18,7 +18,7 @@ class Container extends Component {
             <ProtectedRoute exact path='/dashboard' component={Dashboard} />
             <ProtectedRoute exact path='/leaderboard' component={Leaderboard} />
             <ProtectedRoute exact path='/stats' component={Stats} />
-            <Route component='NoMatch' />
+            <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>

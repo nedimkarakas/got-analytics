@@ -17,7 +17,11 @@ class Leaderboard extends Component {
             this.setState({ userList: Object.keys(snapshot.val()).map(k => snapshot.val()[k]) })
         });
         firebase.database().ref('leaderboard').orderByChild('userId').equalTo(auth.getUser().uid).once('value', snapshot => {
-            this.setState({ myStanding: Object.keys(snapshot.val()).map(k => snapshot.val()[k])[0] })
+            if (snapshot) {
+                this.setState({ myStanding: Object.keys(snapshot.val()).map(k => snapshot.val()[k])[0] })
+            } else {
+                this.setState({ myStanding: false })
+            }
         });
     }
 
@@ -45,7 +49,7 @@ class Leaderboard extends Component {
                     ))
                 }
                 {
-                    !isUserInTop10 ?
+                    !isUserInTop10 || !!this.state.myStanding ?
                         <div className="row rounded border border-dark mt-4">
                             <div className="col-sm-1 align-middle my-auto">...</div>
                             <div className="col-sm-2">

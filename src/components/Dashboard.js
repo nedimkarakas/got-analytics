@@ -45,7 +45,7 @@ class Dashboard extends Component {
             <div>
                 <div className="d-flex">
                     {
-                        this.state.choices.map((c, i) => <Character onClick={this.toggleChoice} character={c} />)
+                        this.state.choices.map((c, i) => <Character key={i} onClick={this.toggleChoice} character={c} />)
                     }
                 </div>
                 <div className="d-flex my-5">
