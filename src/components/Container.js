@@ -6,6 +6,7 @@ import Stats from './Stats';
 import Leaderboard from './Leaderboard';
 import Navbar from './Navbar';
 import NoMatch from "./NoMatch";
+import Rules from '../components/Rules';
 
 class Container extends Component {
   render() {
@@ -18,6 +19,7 @@ class Container extends Component {
             <ProtectedRoute exact path='/dashboard' component={Dashboard} />
             <ProtectedRoute exact path='/leaderboard' component={Leaderboard} />
             <ProtectedRoute exact path='/stats' component={Stats} />
+            <ProtectedRoute exact path='/rules' component={Rules} />
             <Route component={NoMatch} />
           </Switch>
         </div>
