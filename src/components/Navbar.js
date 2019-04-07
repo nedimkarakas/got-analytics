@@ -9,7 +9,7 @@ class Navbar extends Component {
 
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-                <span className="navbar-brand">GoT Deadpool</span>
+                <span className="navbar-brand">GoT: The Final Bracket</span>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
