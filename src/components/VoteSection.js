@@ -5,9 +5,10 @@ import '../styles/VoteSection.css'
 class VoteSection extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
-            votes: []
+            votes: [],
+            search: ''
         };
     }
 
@@ -26,19 +27,29 @@ class VoteSection extends Component {
         return this.state.votes.findIndex(c => c === choice);
     }
 
+    searchInput = (event) => {
+        this.setState({search: event.target.value});
+    }
+
     render() {
         return (
             <div>
-                {
-                    !!this.props.title ?
-                        <h2>
-                            {this.props.title}
-                        </h2>
-                        : null
-                }
                 <div className="d-flex">
                     {
-                        this.props.choices.map((c, i) => <Character isSelected={this.findChoiceIndex(c.Name) === -1 ? false : true} key={i} onClick={this.toggleChoice} character={c} />)
+                        !!this.props.title ?
+                            <h2>
+                                {this.props.title}
+                            </h2>
+                            : null
+                    }
+                    <div className="ml-auto">
+                        <input className="form-control" onChange={(e) => this.searchInput(e)} placeholder="Filter..." type="text"/>
+                    </div>
+                </div>
+
+                <div className="d-flex">
+                    {
+                        this.props.choices.filter(c => c.Name.toLowerCase().includes(this.state.search.toLowerCase())).map((c, i) => <Character isSelected={this.findChoiceIndex(c.Name) === -1 ? false : true} key={i} onClick={this.toggleChoice} character={c} />)
                     }
                 </div>
                 <div className="d-flex my-5">

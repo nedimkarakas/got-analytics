@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import '../styles/Character.css';
 
 class Character extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class Character extends Component {
 
     render() {
         return (
-            <div className={"text-center " + (this.props.isSelected ? "d-none" : "")}>
+            <div className={"text-center width-75-px " + (this.props.isSelected ? "d-none" : "")}>
                 <div>
                     <img alt={this.props.character.Name} src={this.props.character.Image} key={this.props.character.Name} onClick={this.toggleSelect} width="75" height="75" className="rounded-circle" />
                 </div>
