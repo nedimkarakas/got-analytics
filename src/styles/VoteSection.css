@@ -1,3 +1,6 @@
+.title{
+  padding-top: 100%;
+}
 .hover-danger:hover {
     background-color: #dc3545 !important;
 }
