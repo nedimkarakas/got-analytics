@@ -28,7 +28,7 @@ class VoteSection extends Component {
     }
 
     searchInput = (event) => {
-        this.setState({search: event.target.value});
+        this.setState({ search: event.target.value });
     }
 
     render() {
@@ -43,11 +43,11 @@ class VoteSection extends Component {
                             : null
                     }
                     <div className="ml-auto">
-                        <input className="form-control" onChange={(e) => this.searchInput(e)} placeholder="Filter..." type="text"/>
+                        <input className="form-control" onChange={(e) => this.searchInput(e)} placeholder="Filter..." type="text" />
                     </div>
                 </div>
 
-                <div className="d-flex">
+                <div className="d-flex horizontal-scroll">
                     {
                         this.props.choices.filter(c => c.Name.toLowerCase().includes(this.state.search.toLowerCase())).map((c, i) => <Character isSelected={this.findChoiceIndex(c.Name) === -1 ? false : true} key={i} onClick={this.toggleChoice} character={c} />)
                     }
