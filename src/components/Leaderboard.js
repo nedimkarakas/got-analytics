@@ -14,10 +14,10 @@ class Leaderboard extends Component {
 
     componentDidMount() {
         firebase.database().ref('leaderboard').orderByChild('points').limitToFirst(10).once('value', snapshot => {
-            this.setState({ userList: Object.keys(snapshot.val()).map(k => snapshot.val()[k]) })
+            this.setState({ userList: Object.keys(snapshot.val()).map(k => snapshot.val()[k]).reverse() })
         });
         firebase.database().ref('leaderboard').orderByChild('userId').equalTo(auth.getUser().uid).once('value', snapshot => {
-            if (snapshot) {
+            if (snapshot.val()) {
                 this.setState({ myStanding: Object.keys(snapshot.val()).map(k => snapshot.val()[k])[0] })
             } else {
                 this.setState({ myStanding: false })
@@ -49,14 +49,14 @@ class Leaderboard extends Component {
                     ))
                 }
                 {
-                    !isUserInTop10 || !!this.state.myStanding ?
+                    !isUserInTop10 ?
                         <div className="row rounded border border-dark mt-4">
                             <div className="col-sm-1 align-middle my-auto">...</div>
                             <div className="col-sm-2">
-                                <img className="rounded-circle" src={this.state.myStanding.userImg} alt={this.state.myStanding.displayName} width="50" height="50" />
+                                <img className="rounded-circle" src={!!this.state.myStanding ? this.state.myStanding.userImg : auth.getUser().photoURL} alt={!!this.state.myStanding ? this.state.myStanding.displayName : auth.getUser().displayName} width="50" height="50" />
                             </div>
-                            <div className="col-sm-8 align-middle my-auto">{this.state.myStanding.displayName}</div>
-                            <div className="col-sm-1 align-middle my-auto">{this.state.myStanding.points}</div>
+                            <div className="col-sm-8 align-middle my-auto">{!!this.state.myStanding ? this.state.myStanding.displayName : auth.getUser().displayName}</div>
+                            <div className="col-sm-1 align-middle my-auto">{!!this.state.myStanding ? this.state.myStanding.points : 0}</div>
                         </div>
                         :
                         null
