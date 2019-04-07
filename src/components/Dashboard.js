@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import firebase from '../services/firebase';
 import auth from '../services/auth';
-import Character from './Character';
+import VoteSection from './VoteSection';
 
 class Dashboard extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            choices: [],
-            votes: [],
+            choices: []
         };
     }
 
@@ -19,22 +18,28 @@ class Dashboard extends Component {
         });
     }
 
-    toggleChoice = (choice) => {
-        const votes = this.state.votes.slice();
-        const choiceIndex = votes.findIndex(c => c === choice);
-        if (choiceIndex > -1) {
-            votes.splice(choiceIndex, 1);
-        } else {
-            votes.push(choice);
-        }
-        this.setState({ votes: votes });
+    submitDeadpool = (votes) => {
+        this.submit('deadpool', votes);
     }
 
-    submit = () => {
+    submitSafe = (votes) => {
+        this.submit('safe', votes);
+    }
+
+    submitIronThrone = (votes) => {
+        this.submit('ironthrone', votes);
+    }
+
+    submitAzorAhai = (votes) => {
+        this.submit('azorahai', votes);
+    }
+
+    submit = (voteSection, votes) => {
         const votesRef = firebase.database().ref('votes');
         const newEntryKey = votesRef.push().key;
         votesRef.child(newEntryKey).set({
-            votes: this.state.votes,
+            section: voteSection,
+            votes: votes,
             timestamp: new Date().valueOf(),
             userId: auth.getUser().uid
         });
@@ -43,18 +48,10 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                <div className="d-flex">
-                    {
-                        this.state.choices.map((c, i) => <Character key={i} onClick={this.toggleChoice} character={c} />)
-                    }
-                </div>
-                <div className="d-flex my-5">
-                    <strong>Picks: </strong>
-                    {
-                        this.state.votes.map(v => <span key={v} className="mx-3">{v}</span>)
-                    }
-                </div>
-                <button className="btn btn-success" onClick={(e) => this.submit()} disabled={this.state.votes.length === 0}>SUBMIT</button>
+                <VoteSection title="Deadpool" choices={this.state.choices} submit={this.submitDeadpool} />
+                <VoteSection title="Safe" choices={this.state.choices} submit={this.submitSafe} />
+                <VoteSection title="Iron throne" choices={this.state.choices} submit={this.submitIronThrone} />
+                <VoteSection title="Azor Ahai" choices={this.state.choices} submit={this.submitAzorAhai} />
             </div>
         );
     }
