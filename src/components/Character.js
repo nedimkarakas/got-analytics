@@ -11,8 +11,9 @@ class Character extends Component {
     }
 
     toggleSelect = () => {
-        this.props.onClick(this.props.character.Name);
-        // this.setState({isSelected: !this.state.isSelected});
+        if (this.props.onClick) {
+            this.props.onClick(this.props.character.Name)
+        }
     }
 
     render() {
