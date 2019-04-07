@@ -14,11 +14,15 @@ class Leaderboard extends Component {
 
     componentDidMount() {
         firebase.database().ref('leaderboard').orderByChild('points').limitToFirst(10).once('value', snapshot => {
-            this.setState({ userList: Object.keys(snapshot.val()).map(k => snapshot.val()[k]).reverse() })
+            const snapValue = snapshot.val();
+            let standings = Object.keys(snapValue).map(k => snapValue[k]);
+            standings.sort((a, b) => b.points - a.points);
+            this.setState({ userList: standings})
         });
         firebase.database().ref('leaderboard').orderByChild('userId').equalTo(auth.getUser().uid).once('value', snapshot => {
             if (snapshot.val()) {
-                this.setState({ myStanding: Object.keys(snapshot.val()).map(k => snapshot.val()[k])[0] })
+                const standings = Object.keys(snapshot.val()).map(k => snapshot.val()[k])[0];
+                this.setState({ myStanding: standings })
             } else {
                 this.setState({ myStanding: false })
             }
