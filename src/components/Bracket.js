@@ -27,7 +27,17 @@ class Bracket extends Component {
                                 userBrackets: userBrackets
                             });
                         }
-                    })
+                    });
+                    // ZGLAJZ
+                    // firebase.database().ref('leaderboard').orderByChild('userId').equalTo(membership.member).once('value', snapshot => {
+                    //     if (snapshot.val()) {
+                    //         bracketPoints = this.state.bracketPoints.slice();
+                    //         bracketPoints.push(Object.keys(snapshot.val()).map(k => snapshot.val()[k]));
+                    //         this.setState({
+                    //             bracketPoints: bracketPoints
+                    //         });
+                    //     }
+                    // })
                 });
             }
         });
@@ -144,7 +154,7 @@ class Bracket extends Component {
 
                 <div>
                     {
-                        this.state.userBrackets.map((b, i) => <div key={i}><span>{b.name}</span>  <span>{b.key}</span></div>)
+                        this.state.userBrackets.map((b, i) => <div className="my-3" key={i}><h5>{b.name}</h5><span>Key: {b.key}</span></div>)
                     }
                 </div>
             </div>

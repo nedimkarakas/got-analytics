@@ -7,25 +7,27 @@ import Leaderboard from './Leaderboard';
 import Navbar from './Navbar';
 import NoMatch from "./NoMatch";
 import Rules from '../components/Rules';
-import Bracket  from '../components/Bracket';
+import Bracket from '../components/Bracket';
 
 class Container extends Component {
   render() {
     return (
-      <Router>
-        <Navbar />
-        <div className="mt-4">
-          <Switch>
-            <Redirect exact from='/' to='/dashboard' />
-            <ProtectedRoute exact path='/dashboard' component={Dashboard} />
-            <ProtectedRoute exact path='/leaderboard' component={Leaderboard} />
-            <ProtectedRoute exact path='/stats' component={Stats} />
-            <ProtectedRoute exact path='/rules' component={Rules} />
-            <ProtectedRoute exact path='/bracket' component={Bracket} />
-            <Route component={NoMatch} />
-          </Switch>
-        </div>
-      </Router>
+      <div className="container">
+        <Router>
+          <Navbar />
+          <div className="mt-4">
+            <Switch>
+              <Redirect exact from='/' to='/dashboard' />
+              <ProtectedRoute exact path='/dashboard' component={Dashboard} />
+              <ProtectedRoute exact path='/leaderboard' component={Leaderboard} />
+              <ProtectedRoute exact path='/stats' component={Stats} />
+              <ProtectedRoute exact path='/rules' component={Rules} />
+              <ProtectedRoute exact path='/bracket' component={Bracket} />
+              <Route component={NoMatch} />
+            </Switch>
+          </div>
+        </Router>
+      </div>
     );
   }
 }

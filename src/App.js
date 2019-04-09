@@ -8,14 +8,12 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="container">
         <Router>
           <Switch>
             <Route path='/login' component={Login} />
             <ProtectedRoute path='/' component={Container} />
           </Switch>
         </Router>
-      </div>
     );
   }
 }
