@@ -4,10 +4,19 @@ import auth from "../services/auth";
 import '../styles/Navbar.css';
 
 class Navbar extends Component {
+    constructor(props){
+      super(props);
+    }
+    logout = () => {
+      auth.logout();
+      this.props.history.push("login");
+    }
     render() {
         const displayName = auth.isAuthenticated() ? auth.getUser().displayName.split(' ')[0] : null;
         const imageUrl = auth.isAuthenticated() ? auth.getUser().photoURL : null;
-
+        if (!auth.isAuthenticated()) {
+          return null;
+        }
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
                 <span className="navbar-brand">GoT: The Final Bracket</span>
@@ -41,6 +50,9 @@ class Navbar extends Component {
                                     Welcome, {displayName}
                                 </span>
                                 <img src={imageUrl} alt={displayName} width="30" height="30" className="rounded-circle ml-2" />
+                                <button onClick={() => this.logout()}>
+                                  Logout
+                                </button>
                             </div>
                             : null
                         }

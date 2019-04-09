@@ -14,7 +14,6 @@ class Container extends Component {
     return (
       <div className="container">
         <Router>
-          <Navbar />
           <div className="mt-4">
             <Switch>
               <Redirect exact from='/' to='/dashboard' />
