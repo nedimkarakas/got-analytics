@@ -17,7 +17,7 @@ class Leaderboard extends Component {
             const snapValue = snapshot.val();
             let standings = Object.keys(snapValue).map(k => snapValue[k]);
             standings.sort((a, b) => b.points - a.points);
-            this.setState({ userList: standings})
+            this.setState({ userList: standings })
         });
         firebase.database().ref('leaderboard').orderByChild('userId').equalTo(auth.getUser().uid).once('value', snapshot => {
             if (snapshot.val()) {
@@ -25,6 +25,42 @@ class Leaderboard extends Component {
                 this.setState({ myStanding: standings })
             } else {
                 this.setState({ myStanding: false })
+            }
+        });
+        firebase.database().ref('bracketMemberships').orderByChild('member').equalTo(auth.getUser().uid).once('value', snapshot => {
+            if (snapshot.val()) {
+                Object.keys(snapshot.val()).map(k => {
+                    const bracketKey = snapshot.val()[k].bracket;
+                    firebase.database().ref('bracketMemberships').orderByChild('bracket').equalTo(bracketKey).once('value', snapshot => {
+                        if (snapshot.val()) {
+                            const allUsersBracket = Object.keys(snapshot.val()).map(k => snapshot.val()[k]);
+                            const allUserPoints = this.state.allUserPoints ? this.state.allUserPoints.slice() : [];
+                            allUsersBracket.forEach(u => {
+                                const existingUser = allUserPoints.find(p => p.userId === u.member);
+                                if (!existingUser) {
+                                    firebase.database().ref('leaderboard').orderByChild('userId').equalTo(u.member).once('value', snapshot => {
+                                        const snapValue = snapshot.val();
+                                        if (snapValue) {
+                                            Object.keys(snapValue).map(k => snapValue[k]).map(p => {
+                                                p.brackets = [bracketKey];
+                                                this.setState({
+                                                    allUserPoints: this.state.allUserPoints ? [...this.state.allUserPoints.slice(), p] : [p]
+                                                });
+                                            });
+                                        }
+                                    });
+                                } else {
+                                    existingUser.brackets.push(bracketKey);
+                                }
+                            });
+                        }
+                    })
+                    firebase.database().ref('brackets').orderByChild('key').equalTo(bracketKey).once('value', snapshot => {
+                        this.setState({
+                            userBrackets: this.state.userBrackets ? [...this.state.userBrackets.slice(), ...Object.keys(snapshot.val()).map(k => snapshot.val()[k])] : [...Object.keys(snapshot.val()).map(k => snapshot.val()[k])]
+                        })
+                    });
+                })
             }
         });
     }
