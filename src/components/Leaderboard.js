@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import firebase from '../services/firebase';
 import auth from '../services/auth';
+import BracketLeaderboard from './BracketLeaderboard';
 
 class Leaderboard extends Component {
     constructor(props) {
@@ -100,6 +101,15 @@ class Leaderboard extends Component {
                         </div>
                         :
                         null
+                }
+
+                {
+                  this.state.userBrackets && this.state.userBrackets.map(b => (
+                    <div>
+                      <h3>{b.name}</h3>
+                      <BracketLeaderboard users={this.state.allUserPoints && this.state.allUserPoints.filter(p => p.brackets.includes(b.key))}></BracketLeaderboard>
+                    </div>
+                  ))
                 }
             </div>
         );
